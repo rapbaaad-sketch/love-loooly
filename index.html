@@ -1,88 +1,130 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title> بحبك يا لولييي </title>
+<meta charset="UTF-8">
+<title>Love Animation</title>
+<audio autoplay loop>
+  <source src="iloveu PM.mpeg" type="audio/mpeg">
+</audio>
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: radial-gradient(circle, #ff758f, #ff4d6d);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-    }
+<style>
+body{
+    margin:0;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+    font-family: Arial, sans-serif;
+}
 
-    .love-text {
-      font-size: 55px;
-      color: white;
-      text-shadow: 0 0 25px red;
-      animation: blink 1s infinite;
-      z-index: 10;
-    }
+/* ===== القلب الكبير ===== */
+.wrapper{
+    position:relative;
+    width:700px;
+    height:600px;
+    z-index:2;
+}
 
-    @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0.2; }
-      100% { opacity: 1; }
-    }
+.big-heart{
+    width:100%;
+    height:100%;
+    color:#ff2e63;
+    font-size:18px;
+    font-weight:bold;
+    line-height:20px;
+    text-align:center;
 
-    .heart {
-      position: absolute;
-      font-size: 28px;
-      animation: float 6s linear infinite;
-      opacity: 0.9;
-    }
+    -webkit-clip-path: polygon(
+        50% 95%,
+        5% 55%,
+        15% 30%,
+        35% 15%,
+        50% 30%,
+        65% 15%,
+        85% 30%,
+        95% 55%
+    );
+    clip-path: polygon(
+        50% 95%,
+        5% 55%,
+        15% 30%,
+        35% 15%,
+        50% 30%,
+        65% 15%,
+        85% 30%,
+        95% 55%
+    );
 
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh) scale(1.6);
-        opacity: 0;
-      }
-    }
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-content:center;
+    overflow:hidden;
+}
 
-    iframe {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      width: 300px;
-      height: 170px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      z-index: 20;
-    }
-  </style>
+.big-heart span{
+    margin:3px;
+}
+
+/* ===== القلوب الصغيرة ===== */
+.small-hearts{
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:1;
+}
+
+.small{
+    position:absolute;
+    color:#ff4d88;
+    font-size:12px;
+    opacity:0.7;
+    animation: float 6s linear infinite;
+}
+
+/* حركة لف حوالين القلب */
+@keyframes float{
+    0%{ transform:rotate(0deg) translateX(350px) rotate(0deg);}
+    100%{ transform:rotate(360deg) translateX(350px) rotate(-360deg);}
+}
+</style>
 </head>
 <body>
 
-  <div class="love-text">بحبك يا لولييي عاوز ابوسك  ❤️</div>
+<div class="small-hearts"></div>
 
-  <script>
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💖";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-      heart.style.fontSize = (Math.random() * 20 + 20) + "px";
-      document.body.appendChild(heart);
+<div class="wrapper">
+    <div class="big-heart"></div>
+</div>
 
-      setTimeout(() => heart.remove(), 6000);
-    }
+<script>
+/* ===== تكوين القلب الكبير ===== */
+const big = document.querySelector(".big-heart");
 
-    setInterval(createHeart, 150);
-  </script>
+for(let i = 0; i < 500; i++){
+    const span = document.createElement("span");
+    span.textContent = "i love you lana";
+    big.appendChild(span);
+}
+
+/* ===== القلوب الصغيرة اللي بتلف ===== */
+const container = document.querySelector(".small-hearts");
+
+for(let i = 0; i < 12; i++){
+    const span = document.createElement("div");
+    span.className = "small";
+    span.textContent = "i love you lana ❤";
+    span.style.top = "50%";
+    span.style.left = "50%";
+    span.style.animationDuration = (4 + Math.random()*4) + "s";
+    span.style.animationDelay = (Math.random()*2) + "s";
+    container.appendChild(span);
+}
+</script>
 
 </body>
 </html>
-
-
-
-
